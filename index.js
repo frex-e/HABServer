@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
 const PORT = 8080;
+const fs = require('fs');
+
 let current = {};
+let vars = "vars.txt"
 app.use(express.json())
 
 // Begins express server
