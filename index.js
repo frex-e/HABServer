@@ -1,13 +1,31 @@
 const express = require('express');
 const app = express();
 const PORT = 8080;
+const fs = require('fs');
+
+// Defining todays date for log file
+let current_date =new Date();
+const logfile = `${current_date.getFullYear()}-${current_date.getMonth()+1}-${current_date.getDate()}_${current_date.getHours()}:${current_date.getMinutes()}:${current_date.getSeconds()}`;
+
 let current = {};
+
+// JSON Parsing
 app.use(express.json())
+
+// Displays stuff nicely
+function display(func){
+    console.clear()
+    console.log(`Alive at port: ${PORT}`)
+    console.log(`Logging to file ${logfile}`)
+    func()
+}
+
 
 // Begins express server
 app.listen(PORT,()=>{
-    console.log("We're alive")
+    display(()=>console.log(""))
 })
+
 
 
 //Listents at /post/
@@ -21,9 +39,11 @@ app.post('/post/:id',(req,res)=>{
 
     // Adds value to table and stores locally
     } else {
-        current[id] = value;
-        console.table(current);
         res.status(200).send();
+        current[id] = value;
+        display(()=>{
+            console.table(current)
+        })
     }
 
 })
