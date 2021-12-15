@@ -4,3 +4,4 @@ from core import PostHandler
 postHandler = PostHandler("localhost:8080")
 
 postHandler.post("alitude",100)
+postHandler.post("distance",21)
