@@ -62,22 +62,18 @@ function logData() {
     for (var i = 0; i < keys.length; i++){
         buffer = buffer + keys[i] + ","
     };
+
     //Writes buffer to file
     fs.writeFile(logfile,buffer,(err)=>{
         if (err) throw err;
-        display(()=>{
-            console.table(current);
-            console.log("logfile updating!");
+        for (const entry of log) {
+            buffer = `\n${entry[0]}` + repeatStr(",", findIndexEqual(keys,entry[1])+1) +`${entry[2]}` + repeatStr(",", keys.length - findIndexEqual(keys, entry[1]));
+            fs.appendFile(logfile, buffer, () => {
+                if (err) throw err;
+             })
+        }
 
-            for (const entry of log) {
-                buffer = `${entry[0]}` + repeatStr(",", findIndexEqual(keys,entry[1])+1) +`${entry[2]}` + repeatStr(",", keys.length - findIndexEqual(keys, entry[1]));
-                fs.appendFile(logfile, buffer, () => {
-                    if (err) throw err;
-                })
-            }
-
-        })
-    });
+        });
 }
 
 function findIndexEqual(list,y){
