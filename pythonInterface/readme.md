@@ -15,7 +15,7 @@ curl -LJO https://raw.githubusercontent.com/frex-e/HABServer/master/pythonInterf
 ```
 
 ## Usage
-Import the package, then define the postHandler object. (Hehe)
+Import the package, then define the postHandler object.
 Pass the url/address of the server into the object.
 (I think the best way of handling this is using a environment variable. $URL or something like that because the server url is going to change constantly, and that way we only need to define it once it change for each system and various python scripts would use it.)
 ```python
