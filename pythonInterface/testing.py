@@ -3,5 +3,11 @@ from core import PostHandler
 
 postHandler = PostHandler("localhost:8080")
 
-postHandler.post("alitude",100)
-postHandler.post("distance",21)
+while True:
+    print("")
+    atr = input(f"Attribute or exit?\n").lower()
+    if atr == "exit": break
+    else:
+        print("")
+        val = input("Value:\n")
+        postHandler.post(atr,val)
