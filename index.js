@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const PORT = 8080;
 const fs = require('fs');
+//TODO Only reload for new variable, and preload vars
+
 
 // Defines starting time
 const startTime = Date.now()
@@ -72,8 +74,11 @@ function logData() {
     //Writes buffer to file
     fs.writeFile(logfile, buffer, (err) => {
         if (err) throw err;
+
+        // Loops over each entry
         for (const entry of log) {
             buffer = `\n${entry[0]}` + repeatStr(",", findIndexEqual(keys, entry[1]) + 1) + `${entry[2]}` + repeatStr(",", keys.length - findIndexEqual(keys, entry[1]));
+            // Adds line to file
             fs.appendFile(logfile, buffer, () => {
                 if (err) throw err;
             })
@@ -82,6 +87,7 @@ function logData() {
     });
 }
 
+// Returns index of item in list
 function findIndexEqual(list, y) {
     return list.findIndex((x) => {
         if (x == y) return true
